@@ -33,6 +33,6 @@ class MyApp extends StatelessWidget {
         ),
         // home: const HomeScreen(),
         // home: const OpenBankingSettings(),
-        home: const BankCards());
+        home: const OpenBankingSettings());
   }
 }
