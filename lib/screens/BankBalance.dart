@@ -11,8 +11,27 @@ class BankBalance extends StatefulWidget {
 
 class _BankBalanceState extends State<BankBalance> {
   List banks = [
-    {"name": "btg pactual"},
-    {"name": "nu pagamentos s.a."},
+    {
+      "addNewBank": false,
+      "bankIcon": "assets/app-logo.svg",
+      "name": "cbank",
+      "balance": "2.631,36",
+      "selected": false
+    },
+    {
+      "addNewBank": false,
+      "bankIcon": "assets/logo-btg.svg",
+      "name": "btg pactual",
+      "balance": "2.631,36",
+      "selected": true
+    },
+    {
+      "addNewBank": true,
+      "bankIcon": "",
+      "name": "Adicionar novo banco",
+      "balance": '',
+      "selected": false
+    }
   ];
 
   @override
@@ -20,7 +39,7 @@ class _BankBalanceState extends State<BankBalance> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-              backgroundColor: Colors.black,
+              backgroundColor: Color.fromARGB(255, 28, 28, 28),
               elevation: 0,
               title: TextButton.icon(
                 onPressed: () {},
@@ -33,24 +52,37 @@ class _BankBalanceState extends State<BankBalance> {
                   style: GoogleFonts.inter(color: Colors.white, fontSize: 14),
                 ),
               )),
-          // backgroundColor: Colors.black,
-          backgroundColor: Colors.amber,
+          backgroundColor: Color.fromARGB(255, 28, 28, 28),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Saldo de suas contas",
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
+                  child: Text("Saldo de suas contas",
+                      style: GoogleFonts.inter(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Text(
+                    "R\$8719,12",
                     style: GoogleFonts.inter(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
-                Text(
-                  "Gerencie suas configurações do sistema open-finance de uma maneira simples, transparente e rápida",
-                  style: GoogleFonts.inter(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Text("powered by OpenFinance",
+                      style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.white)),
                 ),
                 SizedBox(
                   height: 10,
@@ -72,24 +104,10 @@ class _BankBalanceState extends State<BankBalance> {
                     SizedBox(
                       width: 10,
                     ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            "aqui você pode editar e deletar todas as permissões de suas conexões open-banking",
-                            overflow: TextOverflow.clip,
-                            style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    )
                   ],
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -97,22 +115,15 @@ class _BankBalanceState extends State<BankBalance> {
                       itemCount: banks.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ConfigCard(
+                            bankIcon: banks[index]["bankIcon"],
                             title: banks[index]["name"],
+                            selected: banks[index]["selected"],
+                            balance: banks[index]["balance"],
+                            addNewBank: banks[index]["addNewBank"],
                             editOnTap: () {},
                             deleteOnTap: () {});
                       }),
-                  // children: [
-                  //   ConfigCard(
-                  //       title: "btg pactual",
-                  //       editOnTap: () {},
-                  //       deleteOnTap: () {}),
-                  //   ConfigCard(
-                  //       title: "nu pagamentos s.a.",
-                  //       editOnTap: () {},
-                  //       deleteOnTap: () {})
-                  // ],
-                  // ),
-                )
+                ),
               ],
             ),
           )),
@@ -121,13 +132,22 @@ class _BankBalanceState extends State<BankBalance> {
 }
 
 class ConfigCard extends StatelessWidget {
-  const ConfigCard({
-    Key? key,
-    required this.title,
-    required this.editOnTap,
-    required this.deleteOnTap,
-  }) : super(key: key);
+  bool selected = false;
+
+  ConfigCard(
+      {Key? key,
+      required this.title,
+      required this.editOnTap,
+      required this.deleteOnTap,
+      required this.selected,
+      required this.balance,
+      required this.bankIcon,
+      required this.addNewBank})
+      : super(key: key);
   final String title;
+  final String balance;
+  final bankIcon;
+  final bool addNewBank;
   final VoidCallback editOnTap;
   final VoidCallback deleteOnTap;
 
@@ -142,35 +162,45 @@ class ConfigCard extends StatelessWidget {
               width: double.maxFinite,
               height: 80,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(25)),
+                  color: addNewBank
+                      ? Colors.white30
+                      : selected
+                          ? Colors.white30
+                          : Color.fromARGB(0, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(25)),
               padding: EdgeInsets.only(left: 20, right: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  IconButton(
+                      onPressed: () => print("Add new cardz"),
+                      icon: addNewBank
+                          ? Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            )
+                          : Container(
+                              child: SvgPicture.asset(bankIcon),
+                              width: 75,
+                              height: 75,
+                            )),
                   Text(title,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.w300,
                           color: Colors.white)),
-                  IconButton(
-                    icon: Icon(
-                      Icons.mode_edit_outline_outlined,
-                      size: 30,
-                    ),
-                    onPressed: editOnTap,
-                    color: Colors.white,
-                  )
+                  TextButton(
+                      onPressed: () => print("123456789"),
+                      child: Text(balance.length != 0 ? "R\$" + balance : "",
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            color: Colors.white,
+                          )))
                 ],
               ),
             ),
           ),
-          IconButton(
-              onPressed: deleteOnTap,
-              icon: Icon(
-                Icons.delete,
-                color: Colors.black,
-                size: 30,
-              ))
         ],
       ),
     );
