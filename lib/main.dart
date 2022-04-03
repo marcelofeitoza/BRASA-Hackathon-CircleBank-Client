@@ -1,4 +1,6 @@
 import 'package:circlebankapp/screens/BankBalance.dart';
+import 'package:circlebankapp/screens/BankingSettings.dart';
+import 'package:circlebankapp/screens/FinancingScreen.dart';
 import 'package:circlebankapp/screens/Home.dart';
 import 'package:circlebankapp/screens/OpenBankingSettings.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,6 @@ class MyApp extends StatelessWidget {
         ),
         // home: const HomeScreen(),
         // home: const OpenBankingSettings(),
-        home: const BankBalance());
+        home: FinancingScreen());
   }
 }
