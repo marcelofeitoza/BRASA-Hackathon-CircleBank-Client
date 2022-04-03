@@ -1,4 +1,5 @@
 import 'package:circlebankapp/screens/BankBalance.dart';
+import 'package:circlebankapp/screens/BankStatement.dart';
 import 'package:circlebankapp/screens/BankingSettings.dart';
 import 'package:circlebankapp/screens/FinancingScreen.dart';
 import 'package:circlebankapp/screens/Home.dart';
@@ -27,10 +28,10 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.grey,
         ),
         // home: const HomeScreen(),
         // home: const OpenBankingSettings(),
-        home: FinancingScreen());
+        home: const BankStatement());
   }
 }

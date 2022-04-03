@@ -162,20 +162,6 @@ class _FinancingScreenState extends State<FinancingScreen> {
                         physics: BouncingScrollPhysics(),
                       ),
                     ),
-
-                    // Container(
-                    //     padding: EdgeInsets.symmetric(vertical: 30),
-                    //     decoration: const BoxDecoration(
-                    //         color: const Color(0xff62636A),
-                    //         borderRadius: BorderRadius.only(
-                    //             bottomLeft: Radius.circular(40),
-                    //             bottomRight: Radius.circular(40))),
-                    //     child: const ContentText(
-                    //         type: "Financiamento imobiliário",
-                    //         value: "434.862,12",
-                    //         code: "3528e870-9a85-4160",
-                    //         instituition: "btg pactual",
-                    //         image: "assets/btg-logo.svg"))
                   ],
                 ),
               ],
