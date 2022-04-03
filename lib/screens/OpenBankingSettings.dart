@@ -22,7 +22,7 @@ class _OpenBankingSettingsState extends State<OpenBankingSettings> {
               backgroundColor: Colors.white,
               elevation: 0,
               title: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.black,

@@ -38,94 +38,111 @@ class _BankBalanceState extends State<BankBalance> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-              backgroundColor: Color.fromARGB(255, 28, 28, 28),
-              elevation: 0,
-              title: TextButton.icon(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
-                label: Text(
-                  "Voltar",
-                  style: GoogleFonts.inter(color: Colors.white, fontSize: 14),
-                ),
-              )),
+          // appBar: AppBar(
+          //   backgroundColor: Color.fromARGB(255, 28, 28, 28),
+          //   elevation: 0,
+          //   leading: IconButton(
+          //     onPressed: () => Navigator.pop(context),
+          //     icon: const Icon(
+          //       Icons.arrow_back_ios,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          //   title: Text(
+          //     "Voltar",
+          //     style: GoogleFonts.inter(color: Colors.white, fontSize: 14),
+          //   ),
+          // ),
           backgroundColor: Color.fromARGB(255, 28, 28, 28),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
-                  child: Text("Saldo de suas contas",
-                      style: GoogleFonts.inter(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Text(
-                    "R\$8719,12",
-                    style: GoogleFonts.inter(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+          body: Column(
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      )),
+                  Text(
+                    "Voltar",
+                    style: GoogleFonts.inter(color: Colors.white),
+                  )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 15, right: 15),
+                    child: Text("Saldo de suas contas",
+                        style: GoogleFonts.inter(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white)),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Text("powered by OpenFinance",
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Text(
+                      "R\$8719,12",
                       style: GoogleFonts.inter(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white)),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Icon(
-                          Icons.brightness_1,
-                          size: 5,
-                        ),
-                      ],
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: banks.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ConfigCard(
-                            bankIcon: banks[index]["bankIcon"],
-                            title: banks[index]["name"],
-                            selected: banks[index]["selected"],
-                            balance: banks[index]["balance"],
-                            addNewBank: banks[index]["addNewBank"],
-                            editOnTap: () {},
-                            deleteOnTap: () {});
-                      }),
-                ),
-              ],
-            ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Text("powered by OpenFinance",
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w200,
+                            color: Colors.white)),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Icon(
+                            Icons.brightness_1,
+                            size: 5,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: banks.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ConfigCard(
+                              bankIcon: banks[index]["bankIcon"],
+                              title: banks[index]["name"],
+                              selected: banks[index]["selected"],
+                              balance: banks[index]["balance"],
+                              addNewBank: banks[index]["addNewBank"],
+                              editOnTap: () {},
+                              deleteOnTap: () {});
+                        }),
+                  ),
+                ],
+              ),
+            ],
           )),
     );
   }

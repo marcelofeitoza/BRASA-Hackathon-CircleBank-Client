@@ -6,14 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class FinancingScreen extends StatefulWidget {
-  const FinancingScreen({Key? key}) : super(key: key);
+  const FinancingScreen({Key? key, required this.screen_configuration})
+      : super(key: key);
+
+  final String screen_configuration;
 
   @override
   State<FinancingScreen> createState() => _FinancingScreenState();
 }
 
 class _FinancingScreenState extends State<FinancingScreen> {
-  var screen_type = "loans";
   List data = [];
   var personal_data = {};
 
@@ -77,7 +79,7 @@ class _FinancingScreenState extends State<FinancingScreen> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      if (screen_type == "loans") {
+      if (widget.screen_configuration == "loans") {
         personal_data = p_loan;
         data = loans;
       } else {
@@ -102,7 +104,7 @@ class _FinancingScreenState extends State<FinancingScreen> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pop(context),
                         icon: Icon(
                           Icons.arrow_back_ios_new,
                           color: Colors.white,

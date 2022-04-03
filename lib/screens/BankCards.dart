@@ -26,7 +26,7 @@ class _BankCardsState extends State<BankCards> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pop(context),
                         icon: Icon(
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
