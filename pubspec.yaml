@@ -30,7 +30,9 @@ dependencies:
   google_fonts: ^2.3.1
   flutter_svg: ^1.0.3
   accordion: ^2.2.3
-  
+  solid_bottom_sheet: ^0.1.10
+  expandable_bottom_sheet: ^1.1.1+1
+
   flutter:
     sdk: flutter
 
