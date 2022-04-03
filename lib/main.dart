@@ -1,4 +1,5 @@
 import 'package:circlebankapp/screens/Home.dart';
+import 'package:circlebankapp/screens/OpenBankingSettings.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      // home: const HomeScreen(),
+      home: const OpenBankingSettings(),
     );
   }
 }
