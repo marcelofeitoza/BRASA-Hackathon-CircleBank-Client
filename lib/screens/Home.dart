@@ -13,32 +13,32 @@ class _HomeScreenState extends State<HomeScreen> {
   List items = [
     {
       "title": "Área pix",
-      "onTap": () {},
+      "route": "",
       "icon": SvgPicture.asset("assets/pix.svg"),
     },
     {
       "title": "Transferir e depositar",
-      "onTap": () {},
+      "route": "",
       "icon": SvgPicture.asset("assets/transfer.svg"),
     },
     {
       "title": "Financiamentos",
-      "onTap": () {},
+      "route": "/loans",
       "icon": SvgPicture.asset("assets/car.svg")
     },
     {
       "title": "Open Finance",
-      "onTap": () {},
+      "route": "/banking-settings",
       "icon": SvgPicture.asset("assets/dot.svg")
     },
     {
       "title": "Cartões",
-      "onTap": () {},
+      "route": "/cards",
       "icon": SvgPicture.asset("assets/credit_card.svg"),
     },
     {
       "title": "Empréstimos",
-      "onTap": () {},
+      "route": "/financing",
       "icon": SvgPicture.asset("assets/percent.svg"),
     },
   ];
@@ -54,19 +54,23 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: Container(
+                    width: double.maxFinite,
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    color: Colors.black,
+                    color: Color(0xff1C1C1C),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03,
+                        ),
                         Container(
                           height: 50,
                           width: 50,
                           child: SvgPicture.asset("assets/app-logo.svg"),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: MediaQuery.of(context).size.height * 0.05,
                         ),
                         Text("Olá, Luiza!",
                             style: GoogleFonts.inter(
@@ -103,7 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             minimumSize: Size(80, 35),
                           ),
-                          child: Text("ver extrato")),
+                          child: Text("ver extrato",
+                              style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12))),
                       SizedBox(
                         height: 20,
                       ),
@@ -118,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) => Card(
                               title: items[index]["title"],
                               icon: items[index]["icon"],
-                              onTap: items[index]["onTap"]),
+                              route: items[index]["route"]),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -132,58 +140,61 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           Positioned(
-            top: 180,
+            top: MediaQuery.of(context).size.height * 0.25,
             left: 0,
             right: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                width: double.maxFinite,
-                height: 120,
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    color: const Color(0xff393A3E),
-                    borderRadius: BorderRadius.circular(25)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Saldo de suas contas",
-                            style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 16,
+            child: GestureDetector(
+              onTap: (() => Navigator.pushNamed(context, "/balance")),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  width: double.maxFinite,
+                  height: 120,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: const Color(0xff393A3E),
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Saldo de suas contas",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none)),
+                          SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Text("R\$8.729,12",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      decoration: TextDecoration.none)),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(
+                                Icons.remove_red_eye,
                                 color: Colors.white,
-                                decoration: TextDecoration.none)),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Text("R\$8.729,12",
-                                style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    decoration: TextDecoration.none)),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.white,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      size: 50,
-                      color: Colors.white,
-                    )
-                  ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_sharp,
+                        size: 50,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -199,24 +210,25 @@ class Card extends StatelessWidget {
     Key? key,
     required this.title,
     required this.icon,
-    required this.onTap,
+    this.route = "",
   }) : super(key: key);
   final String title;
   final Widget icon;
-  final VoidCallback onTap;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () => route.isEmpty ? null : Navigator.pushNamed(context, route),
         child: Container(
             // height: 130,
             // width: 130,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(15)),
+                color: Color(0xff1C1C1C),
+                borderRadius: BorderRadius.circular(15)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

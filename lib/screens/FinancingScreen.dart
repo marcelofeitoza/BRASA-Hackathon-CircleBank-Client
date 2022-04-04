@@ -6,13 +6,89 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class FinancingScreen extends StatefulWidget {
-  const FinancingScreen({Key? key}) : super(key: key);
+  const FinancingScreen({Key? key, required this.screen_configuration})
+      : super(key: key);
+
+  final String screen_configuration;
 
   @override
   State<FinancingScreen> createState() => _FinancingScreenState();
 }
 
 class _FinancingScreenState extends State<FinancingScreen> {
+  List data = [];
+  var personal_data = {};
+
+  var p_financing = {
+    "type": "Aquisição de veículos automotores",
+    "value": "120.435,53",
+    "code": "3528e870-9a85-4160",
+    "instituition": "cbank",
+    "image": "assets/app-logo.svg"
+  };
+  var p_loan = {
+    "type": "Credito pessoal consiguinado",
+    "value": "55.628,12",
+    "code": "3528e870-9a85-4160",
+    "instituition": "cbank",
+    "image": "assets/app-logo.svg"
+  };
+
+  var financing = [
+    {
+      "type": "Financiamento imobiliário",
+      "value": "683.112,53",
+      "code": "3528e870-9a85-4160",
+      "instituition": "btg pactual",
+      "image": "assets/btg-logo.svg"
+    },
+    {
+      "type": "Aquisição de veículos automotores",
+      "value": "120.435,53",
+      "code": "3528e870-9a85-4160",
+      "instituition": "cbank",
+      "image": "assets/app-logo.svg"
+    },
+  ];
+  var loans = [
+    {
+      "type": "Crédito pessoal consignado",
+      "value": "1.593,43",
+      "code": "3528e870-9a85-4160",
+      "instituition": "btg pactual",
+      "image": "assets/btg-logo.svg"
+    },
+    {
+      "type": "Crédito pessoal consignado",
+      "value": "7.376,63",
+      "code": "3528e870-9a85-4160",
+      "instituition": "btg pactual",
+      "image": "assets/btg-logo.svg"
+    },
+    {
+      "type": "Crédito pessoal consignado",
+      "value": "7.376,63",
+      "code": "3528e870-9a85-4160",
+      "instituition": "btg pactual",
+      "image": "assets/btg-logo.svg"
+    },
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      if (widget.screen_configuration == "loans") {
+        personal_data = p_loan;
+        data = loans;
+      } else {
+        personal_data = p_financing;
+        data = financing;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +104,7 @@ class _FinancingScreenState extends State<FinancingScreen> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pop(context),
                         icon: Icon(
                           Icons.arrow_back_ios_new,
                           color: Colors.white,
@@ -44,50 +120,50 @@ class _FinancingScreenState extends State<FinancingScreen> {
                 ),
                 Column(
                   children: [
-                    const ContentText(
-                        type: "Aquisição de veículos automotores",
-                        value: "120.435,53",
-                        code: "3528e870-9a85-4160",
-                        instituition: "cbank",
-                        image: "assets/app-logo.svg"),
+                    ContentText(
+                        type: personal_data["type"],
+                        value: personal_data["value"],
+                        code: personal_data["code"],
+                        instituition: personal_data["instituition"],
+                        image: personal_data["image"]),
                     SizedBox(
                       height: 40,
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          color: Color(0xff62636A),
-                          height: 150,
-                          width: double.maxFinite,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) => Stack(
+                          children: [
+                            Container(
+                              color: index == data.length - 1
+                                  ? Colors.transparent
+                                  : index % 2 == 0
+                                      ? Color(0xff62636A)
+                                      : Color(0xff393A3E),
+                              height: 150,
+                              width: double.maxFinite,
+                            ),
+                            Container(
+                                padding: EdgeInsets.symmetric(vertical: 30),
+                                decoration: BoxDecoration(
+                                    color: index % 2 == 0
+                                        ? Color(0xff393A3E)
+                                        : Color(0xff62636A),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(40),
+                                        bottomRight: Radius.circular(40))),
+                                child: ContentText(
+                                    type: data[index]["type"],
+                                    value: data[index]["value"],
+                                    code: data[index]["code"],
+                                    instituition: data[index]["instituition"],
+                                    image: data[index]["image"]))
+                          ],
                         ),
-                        Container(
-                            padding: EdgeInsets.symmetric(vertical: 30),
-                            decoration: const BoxDecoration(
-                                color: const Color(0xff393A3E),
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(40),
-                                    bottomRight: Radius.circular(40))),
-                            child: const ContentText(
-                                type: "Financiamento imobiliário",
-                                value: "683.112,53",
-                                code: "3528e870-9a85-4160",
-                                instituition: "btg pactual",
-                                image: "assets/btg-logo.svg"))
-                      ],
+                        itemCount: data.length,
+                        physics: BouncingScrollPhysics(),
+                      ),
                     ),
-                    Container(
-                        padding: EdgeInsets.symmetric(vertical: 30),
-                        decoration: const BoxDecoration(
-                            color: const Color(0xff62636A),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(40),
-                                bottomRight: Radius.circular(40))),
-                        child: const ContentText(
-                            type: "Financiamento imobiliário",
-                            value: "434.862,12",
-                            code: "3528e870-9a85-4160",
-                            instituition: "btg pactual",
-                            image: "assets/btg-logo.svg"))
                   ],
                 ),
               ],

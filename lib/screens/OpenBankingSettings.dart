@@ -22,7 +22,7 @@ class _OpenBankingSettingsState extends State<OpenBankingSettings> {
               backgroundColor: Colors.white,
               elevation: 0,
               title: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.black,
@@ -96,23 +96,83 @@ class _OpenBankingSettingsState extends State<OpenBankingSettings> {
                         return ConfigCard(
                             title: banks[index]["name"],
                             editOnTap: () {},
-                            deleteOnTap: () {});
+                            deleteOnTap: () {
+                              _showConfirmExclusion();
+                            });
                       }),
-                  // children: [
-                  //   ConfigCard(
-                  //       title: "btg pactual",
-                  //       editOnTap: () {},
-                  //       deleteOnTap: () {}),
-                  //   ConfigCard(
-                  //       title: "nu pagamentos s.a.",
-                  //       editOnTap: () {},
-                  //       deleteOnTap: () {})
-                  // ],
-                  // ),
                 )
               ],
             ),
           )),
+    );
+  }
+
+  Future<void> _showConfirmExclusion() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: EdgeInsets.all(45),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          title: Text(
+            'Você tem certeza que deseja excluir a conexão open-banking com a instituição btg pactual?',
+            style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  'Não será mais possível acessar o saldo de sua conta diretamente pelo CBank, consultar históricos de pagamentos, cartões de crédito e muito mais.',
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w300, fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: Text('não',
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Colors.white)),
+                  style: TextButton.styleFrom(
+                    fixedSize: Size(120, 50),
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                SizedBox(width: 10),
+                TextButton(
+                  child: Text('sim',
+                      style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white)),
+                  style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      fixedSize: Size(100, 50),
+                      backgroundColor: Color(0xffAAAAAA)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

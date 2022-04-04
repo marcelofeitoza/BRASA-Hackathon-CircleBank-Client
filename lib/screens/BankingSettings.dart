@@ -55,7 +55,7 @@ class _BankingSettingsState extends State<BankingSettings> {
               backgroundColor: Colors.white,
               elevation: 0,
               title: TextButton.icon(
-                onPressed: () {},
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.black,
