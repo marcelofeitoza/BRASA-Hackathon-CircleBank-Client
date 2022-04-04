@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:circlebankapp/services/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var services = new Services();
   List items = [
     {
       "title": "Área pix",
@@ -42,6 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
       "icon": SvgPicture.asset("assets/percent.svg"),
     },
   ];
+
+  getAccounts() async {
+    return await services.getAccounts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,12 +180,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(height: 5),
                           Row(
                             children: [
-                              Text("R\$8.729,12",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      decoration: TextDecoration.none)),
+                              FutureBuilder<dynamic>(
+                                  future: getAccounts(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      var data = snapshot.data as Map;
+
+                                      return Text('R\$ ${data["totalBalance"]}',
+                                          style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Colors.white,
+                                              decoration: TextDecoration.none));
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  }),
                               SizedBox(
                                 width: 10,
                               ),

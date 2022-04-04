@@ -1,14 +1,35 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class Services {
-  var url = Uri.parse('https://example.com/whatsit/create');
+  final String url = 'http://10.254.17.139:5000/';
+  final _headers = {
+    'Content-Type': 'application/json',
+  };
 
-  Future<dynamic> get() async {
-    var response =
-        await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  post(String path, dynamic data) =>
+      http.post(Uri.http(url, path), headers: _headers, body: jsonEncode(data));
 
-    print(await http.read(Uri.parse('https://example.com/foobar.txt')));
+  getAccounts() async {
+    var response = await http.get(Uri.parse(url + 'api/bank/accounts/balances'),
+        headers: _headers);
+    return jsonDecode(response.body);
+  }
+
+  getTransactions() async {
+    var response = await http.get(
+        Uri.parse(url + 'api/bank/accounts/transactions'),
+        headers: _headers);
+    return jsonDecode(response.body);
+  }
+
+  delete(String path, String id) {
+    return http.delete(Uri.http(url, '$path/$id'), headers: _headers);
+  }
+
+  update(String path, dynamic data) {
+    return http.put(Uri.http(url, path),
+        headers: _headers, body: jsonEncode(data));
   }
 }
