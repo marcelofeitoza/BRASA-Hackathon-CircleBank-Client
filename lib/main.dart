@@ -31,9 +31,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      // home: const HomeScreen(),
-      // home: const OpenBankingSettings(),
-      home: const OpenBankingSettings(),
       initialRoute: '/home',
       routes: {
         '/home': (context) => const HomeScreen(),
