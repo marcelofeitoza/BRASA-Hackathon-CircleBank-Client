@@ -17,24 +17,24 @@ class _HomeScreenState extends State<HomeScreen> {
       "icon": SvgPicture.asset("assets/pix.svg"),
     },
     {
-      "title": "Transferir e depositar",
-      "route": "",
-      "icon": SvgPicture.asset("assets/transfer.svg"),
-    },
-    {
-      "title": "Financiamentos",
-      "route": "/loans",
-      "icon": SvgPicture.asset("assets/car.svg")
-    },
-    {
       "title": "Open Finance",
       "route": "/banking-settings",
       "icon": SvgPicture.asset("assets/dot.svg")
     },
     {
+      "title": "Transferir e depositar",
+      "route": "",
+      "icon": SvgPicture.asset("assets/transfer.svg"),
+    },
+    {
       "title": "Cartões",
       "route": "/cards",
       "icon": SvgPicture.asset("assets/credit_card.svg"),
+    },
+    {
+      "title": "Financiamentos",
+      "route": "/loans",
+      "icon": SvgPicture.asset("assets/car.svg")
     },
     {
       "title": "Empréstimos",
@@ -65,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: MediaQuery.of(context).size.height * 0.03,
                         ),
                         Container(
-                          height: 50,
-                          width: 50,
+                          height: 60,
+                          width: 60,
                           child: SvgPicture.asset("assets/app-logo.svg"),
                         ),
                         SizedBox(
@@ -98,7 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/statements"),
                           style: ElevatedButton.styleFrom(
                             primary: Color(0xff393A3E),
                             shape: RoundedRectangleBorder(
