@@ -21,6 +21,9 @@ class _OpenBankingSettingsState extends State<OpenBankingSettings> {
           appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
+              leading: null,
+              // titleSpacing: 0,
+              automaticallyImplyLeading: false,
               title: TextButton.icon(
                 onPressed: () => Navigator.pop(context),
                 icon: Icon(
