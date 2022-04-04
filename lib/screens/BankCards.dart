@@ -62,11 +62,15 @@ class _BankCardsState extends State<BankCards> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.w300),
                                 ),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Text(
                                   "R\$8.729,12",
                                   style: GoogleFonts.inter(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24),
                                 )
                               ],
                             ),
