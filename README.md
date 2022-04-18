@@ -1,6 +1,8 @@
 #  <img width="28px" height="28px" src="https://i.imgur.com/IzcwA3T.png)" alt="cbank-logo"/> CBank - An open finance friendly digital bank
 ## BTG Challenge - Team 4 - Inteli - Brasa Hacks - 2022
 
+## [Trailer](https://youtu.be/TgpWJ1RESRw)
+
 <img src="https://i.imgur.com/XZD9rkz.png" alt="app-screens-mockup"/>
 
 ## Our team
